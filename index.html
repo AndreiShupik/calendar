@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="calendar.css">
+    <title>Пример 18 - Календарь</title>
+</head>
+
+<body>
+    <div class="container"></div>
+
+    <script>
+        // Создаем собственный календарь
+        function createCalendar(elem, year, month) { // Всавляем календарь в селектор HTML
+            elem = document.querySelector(elem)
+
+            let mon = month - 1
+            let date = new Date(year, mon)
+
+            let table = `
+<table>
+<caption>${month}.${year}</caption>
+<tr>
+    <th>Пн</th>
+    <th>Вт</th>
+    <th>Ср</th>
+    <th>Чт</th>
+    <th>Пт</th>
+    <th>Сб</th>
+    <th>Вс</th>
+</tr>
+<tr>`
+
+            for (let i = 0; i < getDay(date); i++) {
+                table += '<td></td>'
+            }
+
+            while (date.getMonth() == mon) {
+                table += '<td>' + date.getDate() + '</td>'
+                if (getDay(date) % 7 == 6) {
+                    table += '</tr><tr>'
+                }
+                date.setDate(date.getDate() + 1)
+            }
+            if (getDay(date) != 0) {
+                for (let i = getDay(date); i < 7; i++) {
+                    table += '<td></td>'
+                }
+            }
+            table += '</tr></table>'
+            elem.insertAdjacentHTML('beforeend', table)
+        }
+
+        function getDay(date) { // функция, которая возвращает актуальные дни недели (Пн - Вс), где Пн - 0й день, а Вс - 6й
+            let day = date.getDay()
+            if (day == 0) day = 7
+            return day - 1
+        }
+
+        for (let month = 1; month <= 12; month++) {
+            createCalendar('.container', 2021, month)
+        }
+    </script>
+</body>
+
+</html>
