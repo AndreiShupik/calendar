@@ -1,6 +1,21 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+caption {
+    border: 1px solid grey;
+    background: darkseagreen;
+}
+
 .container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(252px, auto));
     max-width: 1100px;
     align-items: start;
+    gap: 5px;
+}
+
+table {
+    border: 1px solid grey;
+    text-align: center;
 }
